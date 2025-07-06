@@ -1,0 +1,23 @@
+# Ignore virtual environments
+fraud-venv/
+.venv/
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore Jupyter checkpoints and temporary files
+.ipynb_checkpoints/
+*.ipynb~
+*.swp
+
+# Ignore data files that shouldn't be committed
+*.csv
+*.parquet
+*.sqlite
+
+# Ignore system files
+.DS_Store
+.env
