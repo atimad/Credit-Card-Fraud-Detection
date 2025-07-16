@@ -1,61 +1,88 @@
-# Credit Card Fraud Detection – SMOTE, Undersampling, and Model Evaluation
+# 💳 Credit Card Fraud Detection Pipeline (SMOTE, ML Models, and Evaluation)
 
-This project explores fraud detection using real-world credit card transaction data. The dataset is highly imbalanced, with fraudulent transactions comprising just 0.172% of the data.
+This project develops a complete end-to-end pipeline for detecting fraudulent credit card transactions using a highly imbalanced dataset. The process includes data preprocessing, SMOTE oversampling, training several classifiers, evaluating them rigorously, and exporting structured results for reporting or dashboards.
 
-## 🔍 Dataset
+---
+
+## 🔢 Dataset Overview
+
 - **Source**: [Kaggle - Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud)
-- **Transactions**: 284,807 over 2 days
-- **Fraud cases**: 492
-- **Features**: 28 PCA components + Time + Amount
-- **Label**: `Class` (1 = fraud, 0 = normal)
+- **Samples**: 284,807 transactions over 2 days
+- **Frauds**: 492 (~0.172% of the data)
+- **Features**:
+  - 28 anonymized PCA components
+  - `Amount` and `Time`
+  - `Class` (Label: 1 = Fraud, 0 = Normal)
 
-## ⚙️ Techniques Used
+---
 
-- **Standardization** of `Amount` and `Time`
-- **Resampling**:
-  - `RandomUnderSampler` for logistic regression
-  - `SMOTE` for Random Forest, XGBoost, and LightGBM
-- **Modeling**:
-  - Logistic Regression
-  - Random Forest
-  - XGBoost (with GridSearchCV)
-  - LightGBM (with GridSearchCV)
-- **Evaluation Metrics**:
-  - Precision-Recall Curve (AUPRC)
-  - F1 Score
-  - Confusion Matrix & Classification Report
+## 📊 Pipeline Architecture
 
-## 📈 Key Outputs
+The notebook follows a structured and interpretable modeling pipeline, inspired by the [Fraud Detection Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/Foreword.html):
 
-- Comparison of F1-score and AUPRC across all four models
-- Precision-Recall curves for each approach
+### 1. 📦 Data Preprocessing
+- Drop non-predictive fields (`Time`)
+- Scale `Amount` using `StandardScaler`
 
-## 📂 Files
+### 2. ⚖️ Resampling Strategy
+- **SMOTE** is applied on the training data to balance classes.
+- No undersampling is used to avoid information loss.
 
-- `fraud_detection_modeling.ipynb`: Main notebook
+### 3. 🤖 Model Training
+Trained and compared using the same pipeline:
+- Logistic Regression
+- Random Forest
+- XGBoost
+- LightGBM
+- CatBoost
+- Optional: Ensemble stacking (planned)
+
+### 4. 📏 Model Evaluation
+Each model is evaluated using:
+- Accuracy, Precision, Recall, F1-score
+- ROC Curve & AUC
+- Confusion Matrix
+
+### 5. 📁 Output & Reporting
+All outputs (predictions, metrics, AUC scores) are saved to:
+```
+Data/output/
+```
+This allows easy integration with reporting tools like Power BI or Streamlit dashboards.
+
+---
+
+## 📂 Key Files
+
+- `CreditCard_Full_Modeling_Pipeline_mod_annotated.ipynb`: Fully annotated modeling notebook with markdown explanations before every step.
+- `Data/output/`: Folder where all result `.csv` files are saved (metrics, predictions, AUC, etc.)
 - `requirements.txt`: Environment setup
 
-## 🚀 How to Run
+---
 
-1. Install dependencies:  
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 🚀 How to Run the Notebook
 
-2. Run the notebook:  
-   ```bash
-   jupyter notebook fraud_detection_modeling.ipynb
-   ```
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch the notebook
+jupyter notebook CreditCard_Full_Modeling_Pipeline_mod_annotated.ipynb
+```
+
+---
 
 ## 📚 References
 
-- Dal Pozzolo et al. (2015) *Calibrating Probability with Undersampling*
-- Carcillo et al. (2018) *Scarff: a scalable framework for streaming credit card fraud detection*
-- [Fraud Detection Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/Chapter_3_GettingStarted/SimulatedDataset.html), which includes a simulator and detailed methodologies for real-world credit card fraud detection.
+- Dal Pozzolo et al. (2015) – *Calibrating Probability with Undersampling*
+- Carcillo et al. (2018) – *Scarff: Streaming Credit Card Fraud Detection*
+- [Fraud Detection Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/Foreword.html) – Theory and practice behind many modeling choices here.
+
+---
 
 ## 🔮 Future Development: Deep Learning Roadmap
 
-While the current approach leverages classical machine learning models (e.g., Logistic Regression, Random Forest, XGBoost), future iterations of this project will explore deep learning techniques inspired by the [Fraud Detection Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/Chapter_3_GettingStarted/SimulatedDataset.html). These approaches aim to better capture complex transaction patterns and improve generalization.
+While the current pipeline covers classical models and structured ML evaluation, we plan to introduce deeper modeling architectures, particularly suited for extreme imbalance and real-time behavioral tracking.
 
 ### 🚀 Planned Enhancements
 
@@ -89,6 +116,6 @@ All deep learning extensions will adhere to the best practices emphasized in the
 
 ---
 
-We welcome contributions or suggestions on integrating these techniques into the pipeline.
+## 🙌 Contributions
 
-
+Contributions, suggestions, and collaborations are welcome — especially around ensembling, tabular DL, or deployment integration.
