@@ -67,7 +67,7 @@ This allows easy integration with reporting tools like Power BI or Streamlit das
 pip install -r requirements.txt
 
 # Launch the notebook
-jupyter notebook CreditCard_Full_Modeling_Pipeline_mod_annotated.ipynb
+jupyter notebook CreditCard_Full_Modeling.ipynb
 ```
 
 ---
